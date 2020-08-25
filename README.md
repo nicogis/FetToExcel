@@ -3,7 +3,7 @@
 
 ### Descrizione
 
-L'utility converte il file teachers (*_teachers.xml), in formato xml, prodotto dal programma [FET](https://lalescu.ro/liviu/fet/download.html)
+L'[utility](https://github.com/nicogis/FetToExcel/releases) converte il file teachers (*_teachers.xml), in formato xml, prodotto dal programma [FET](https://lalescu.ro/liviu/fet/download.html)
 in formato Excel utilizzando un template Excel. FET è un programma libero per generare l'orario degli insegnanti per le scuole.
 
 Le impostazioni predefinite prevedono che il file 'TemplateOrario.xlsx' impostato in base alle proprie esigenze sia nella stessa cartella del programma.
