@@ -1,4 +1,10 @@
-﻿namespace FetToExcel
+﻿//-----------------------------------------------------------------------
+// <copyright file="FetToExcel.cs" company="Studio A&T s.r.l.">
+//     Author: nicogis
+//     Copyright (c) Studio A&T s.r.l. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+namespace FetToExcel
 {
     using OfficeOpenXml;
     using System;
@@ -11,18 +17,90 @@
     using System.Linq;
     using System.Data;
     using System.Diagnostics;
+    using System.Web.Script.Serialization;
 
     public partial class FetToExcel : Form
-    {
+    {       
+        private readonly string pathFileTemplate = null;
+        private readonly string pathFileOuputExcel = null;
+        private readonly string cellStartTeachers = null;
+        private readonly bool openExcel = false;
+
         public FetToExcel()
         {
             InitializeComponent();
-            Assembly assembly = Assembly.GetExecutingAssembly();
             FileVersionInfo fileVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location);
             this.Text = $"{fileVersion.ProductName} - Versione {fileVersion.ProductVersion}";
+
+            this.pathFileTemplate = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TemplateOrario.xlsx");
+            this.cellStartTeachers = "A5";
+
+            // controllo se esiste il file di configurazione
+            string configFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.json");
+            if (File.Exists(configFile))
+            {
+                try
+                {
+                    string jsonConfig = File.ReadAllText(configFile);
+                    JavaScriptSerializer js = new JavaScriptSerializer();
+                    Config config = js.Deserialize<Config>(jsonConfig);
+
+                    string pathTeachersXml = config.PathTeachersXml;
+                    string pathTemplateExcel = config.PathTemplateExcel;
+                    string pathOuputExcel = config.PathOuputExcel;
+                    openExcel = config.OpenExcel;
+
+                    if (!string.IsNullOrWhiteSpace(pathTeachersXml))
+                    {
+                        if (Directory.Exists(pathTeachersXml))
+                        {
+                            this.openFD.InitialDirectory = pathTeachersXml;
+                        }
+                        else
+                        {
+                            if (File.Exists(pathTeachersXml))
+                            {
+                                this.txtFileFet.Text = pathTeachersXml;
+                                this.btnFileFet.Enabled = false;
+                            }
+                        }
+
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(pathOuputExcel))
+                    {
+                        if (Directory.Exists(pathOuputExcel))
+                        {
+                            this.saveFD.InitialDirectory = pathOuputExcel;
+                        }
+                        else
+                        {
+                            this.pathFileOuputExcel = Path.Combine(Path.GetDirectoryName(pathOuputExcel), Path.GetFileNameWithoutExtension(pathOuputExcel) + "_{0}.xlsx");
+                            this.btnFileExcel.Enabled = false;                           
+                        }
+
+                    }
+
+                    if (File.Exists(pathTemplateExcel))
+                    {
+                        pathFileTemplate = pathTemplateExcel;
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(config.CellStartTeachers))
+                    {
+                        cellStartTeachers = config.CellStartTeachers;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Errore nel file di configurazione '{configFile}' pertanto verrà stato ignorato.{Environment.NewLine}Errore: {ex.Message}");
+                }
+            }
+
+            this.txtStartCell.Text = cellStartTeachers;
         }
 
-        private void btnFileFet_Click(object sender, EventArgs e)
+        private void BtnFileFet_Click(object sender, EventArgs e)
         {
             DialogResult result = this.openFD.ShowDialog();
             if (result == DialogResult.OK) 
@@ -31,30 +109,37 @@
             }
         }
 
-        private void btnFileExcel_Click(object sender, EventArgs e)
+        private void BtnFileExcel_Click(object sender, EventArgs e)
         {
             this.saveFD.ShowDialog();
         }
 
-        private void saveFD_FileOk(object sender, System.ComponentModel.CancelEventArgs e) => this.txtFileExcel.Text = this.saveFD.FileName;
+        private void SaveFD_FileOk(object sender, System.ComponentModel.CancelEventArgs e) => this.txtFileExcel.Text = this.saveFD.FileName;
 
-        private void btnImporta_Click(object sender, EventArgs e)
+        private void BtnImporta_Click(object sender, EventArgs e)
         {
             try
-            {
+            {                
                 //check file
                 if (string.IsNullOrWhiteSpace(this.txtFileFet.Text))
                 {
-                    MessageBox.Show("Indicare il file Fet da importare in Excel!", "Fet to Excel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Indicare il file Fet ('*_teachers.xml') da importare in Excel!", "Fet to Excel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     this.btnFileFet.Focus();
                     return;
                 }
 
-                if (string.IsNullOrWhiteSpace(this.txtFileExcel.Text))
+                if (string.IsNullOrWhiteSpace(pathFileOuputExcel))
                 {
-                    MessageBox.Show("Indicare il file Excel!", "Fet to Excel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    this.btnFileExcel.Focus();
-                    return;
+                    if (string.IsNullOrWhiteSpace(this.txtFileExcel.Text))
+                    {
+                        MessageBox.Show("Indicare il file Excel di output!", "Fet to Excel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        this.btnFileExcel.Focus();
+                        return;
+                    }
+                }
+                else
+                {
+                    this.txtFileExcel.Text = string.Format(pathFileOuputExcel, DateTime.Now.ToString("yyyyMMddHHmmss"));
                 }
 
                 XmlDocument document = new XmlDocument();
@@ -65,14 +150,14 @@
                     throw new Exception("Nodo Teachers_Timetable errato!");
                 }
 
-                string pathFileTemplate = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TemplateOrario.xlsx");
+                
 
                 if (!File.Exists(pathFileTemplate))
                 {
-                    MessageBox.Show($"Manca il file {pathFileTemplate}!", "Fet to Excel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show($"Manca il file template Excel '{pathFileTemplate}'!", "Fet to Excel", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
-
+                
 
                 XmlNodeList teachers = teachersTimeTable[0].ChildNodes;
 
@@ -189,12 +274,14 @@
 
                 var fileInfo = new FileInfo(this.txtFileExcel.Text);
                 var fileInfoTemplate = new FileInfo(pathFileTemplate);
+
+
                 using (var excelPackage = new ExcelPackage(fileInfo, fileInfoTemplate))
                 {
 
                     ExcelWorksheet excelWorksheet = excelPackage.Workbook.Worksheets[1]; // 1° foglio
 
-                    string startCell = "A5";
+                    string startCell = cellStartTeachers;
                     if (!string.IsNullOrWhiteSpace(txtStartCell.Text))
                     {
                         startCell = txtStartCell.Text;
@@ -206,19 +293,22 @@
 
                 MessageBox.Show("Esportazione effettuata correttamente!", "Fet to Excel", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                if (openExcel)
+                {
+                    Process.Start(fileInfo.FullName);
+                }
+
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "Fet to Excel", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-
         }
 
 
         private int? IndexGiorno(string giorno, int firstDay = 0)
         {
-            DayOfWeek? dayOfWeek = null;
+            DayOfWeek? dayOfWeek;
 
             if (string.Compare(DateTimeFormatInfo.CurrentInfo.GetDayName(DayOfWeek.Monday), giorno, true) == 0)
             {
@@ -263,10 +353,10 @@
             return idx;
         }
 
-        private void llinkFetToExcel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void LlinkFetToExcel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.llinkFetToExcel.LinkVisited = true;
-            System.Diagnostics.Process.Start("https://github.com/nicogis/FetToExcel/releases");
+            Process.Start("https://github.com/nicogis/FetToExcel/releases");
         }
     }
 }

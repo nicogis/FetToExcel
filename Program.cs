@@ -1,8 +1,14 @@
-﻿using System;
-using System.Windows.Forms;
-
+﻿//-----------------------------------------------------------------------
+// <copyright file="Program.cs" company="Studio A&T s.r.l.">
+//     Author: nicogis
+//     Copyright (c) Studio A&T s.r.l. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 namespace FetToExcel
 {
+    using System;
+    using System.Windows.Forms;
+
     static class Program
     {
         /// <summary>

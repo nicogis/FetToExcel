@@ -1,0 +1,7 @@
+﻿{
+	"pathTeachersXml" : "C:\\AvGis\\RepositoryGit\\FetToExcel\\Varie\\mah_teachers.xml",
+	"pathTemplateExcel" : "",
+	"pathOuputExcel" : "C:\\AvGis\\RepositoryGit\\FetToExcel\\Varie\\test.xlsx",
+	"openExcel" : true,
+	"cellStartTeachers" : "A5"
+}

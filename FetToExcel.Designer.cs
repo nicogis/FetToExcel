@@ -42,20 +42,20 @@
             // 
             // btnFileFet
             // 
-            this.btnFileFet.Location = new System.Drawing.Point(240, 18);
+            this.btnFileFet.Location = new System.Drawing.Point(393, 21);
             this.btnFileFet.Name = "btnFileFet";
-            this.btnFileFet.Size = new System.Drawing.Size(75, 23);
+            this.btnFileFet.Size = new System.Drawing.Size(104, 23);
             this.btnFileFet.TabIndex = 0;
-            this.btnFileFet.Text = "File Fet";
+            this.btnFileFet.Text = "File teachers.xml";
             this.btnFileFet.UseVisualStyleBackColor = true;
-            this.btnFileFet.Click += new System.EventHandler(this.btnFileFet_Click);
+            this.btnFileFet.Click += new System.EventHandler(this.BtnFileFet_Click);
             // 
             // txtFileFet
             // 
             this.txtFileFet.Location = new System.Drawing.Point(17, 21);
             this.txtFileFet.Name = "txtFileFet";
             this.txtFileFet.ReadOnly = true;
-            this.txtFileFet.Size = new System.Drawing.Size(217, 20);
+            this.txtFileFet.Size = new System.Drawing.Size(370, 20);
             this.txtFileFet.TabIndex = 1;
             // 
             // txtFileExcel
@@ -63,34 +63,34 @@
             this.txtFileExcel.Location = new System.Drawing.Point(17, 55);
             this.txtFileExcel.Name = "txtFileExcel";
             this.txtFileExcel.ReadOnly = true;
-            this.txtFileExcel.Size = new System.Drawing.Size(217, 20);
+            this.txtFileExcel.Size = new System.Drawing.Size(370, 20);
             this.txtFileExcel.TabIndex = 3;
             // 
             // btnFileExcel
             // 
-            this.btnFileExcel.Location = new System.Drawing.Point(240, 53);
+            this.btnFileExcel.Location = new System.Drawing.Point(393, 55);
             this.btnFileExcel.Name = "btnFileExcel";
-            this.btnFileExcel.Size = new System.Drawing.Size(75, 23);
+            this.btnFileExcel.Size = new System.Drawing.Size(104, 23);
             this.btnFileExcel.TabIndex = 2;
-            this.btnFileExcel.Text = "File Excel";
+            this.btnFileExcel.Text = "File output Excel";
             this.btnFileExcel.UseVisualStyleBackColor = true;
-            this.btnFileExcel.Click += new System.EventHandler(this.btnFileExcel_Click);
+            this.btnFileExcel.Click += new System.EventHandler(this.BtnFileExcel_Click);
             // 
             // btnImporta
             // 
-            this.btnImporta.Location = new System.Drawing.Point(126, 118);
+            this.btnImporta.Location = new System.Drawing.Point(216, 118);
             this.btnImporta.Name = "btnImporta";
             this.btnImporta.Size = new System.Drawing.Size(75, 23);
             this.btnImporta.TabIndex = 4;
-            this.btnImporta.Text = "Importa";
+            this.btnImporta.Text = "Genera";
             this.btnImporta.UseVisualStyleBackColor = true;
-            this.btnImporta.Click += new System.EventHandler(this.btnImporta_Click);
+            this.btnImporta.Click += new System.EventHandler(this.BtnImporta_Click);
             // 
             // saveFD
             // 
             this.saveFD.DefaultExt = "xlsx";
             this.saveFD.Filter = "File Excel|*xlsx";
-            this.saveFD.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFD_FileOk);
+            this.saveFD.FileOk += new System.ComponentModel.CancelEventHandler(this.SaveFD_FileOk);
             // 
             // openFD
             // 
@@ -100,13 +100,13 @@
             // llinkFetToExcel
             // 
             this.llinkFetToExcel.AutoSize = true;
-            this.llinkFetToExcel.Location = new System.Drawing.Point(259, 127);
+            this.llinkFetToExcel.Location = new System.Drawing.Point(405, 128);
             this.llinkFetToExcel.Name = "llinkFetToExcel";
             this.llinkFetToExcel.Size = new System.Drawing.Size(63, 13);
             this.llinkFetToExcel.TabIndex = 5;
             this.llinkFetToExcel.TabStop = true;
             this.llinkFetToExcel.Text = "Fet to Excel";
-            this.llinkFetToExcel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llinkFetToExcel_LinkClicked);
+            this.llinkFetToExcel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LlinkFetToExcel_LinkClicked);
             // 
             // txtStartCell
             // 
@@ -114,7 +114,6 @@
             this.txtStartCell.Name = "txtStartCell";
             this.txtStartCell.Size = new System.Drawing.Size(40, 20);
             this.txtStartCell.TabIndex = 6;
-            this.txtStartCell.Text = "A5";
             // 
             // label1
             // 
@@ -129,7 +128,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(333, 153);
+            this.ClientSize = new System.Drawing.Size(506, 153);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtStartCell);
             this.Controls.Add(this.llinkFetToExcel);
