@@ -1,4 +1,4 @@
-﻿# FET to Excel
+# FET to Excel
 
 
 ### Descrizione
