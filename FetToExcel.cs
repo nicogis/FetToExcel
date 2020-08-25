@@ -355,8 +355,14 @@ namespace FetToExcel
 
         private void LlinkFetToExcel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.llinkFetToExcel.LinkVisited = true;
+            ((LinkLabel)sender).LinkVisited = true;
             Process.Start("https://github.com/nicogis/FetToExcel/releases");
+        }
+
+        private void llinkFetToExcelHelp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            ((LinkLabel)sender).LinkVisited = true;
+            Process.Start("https://github.com/nicogis/FetToExcel/blob/master/README.md");
         }
     }
 }

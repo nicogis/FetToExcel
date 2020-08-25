@@ -38,6 +38,7 @@
             this.llinkFetToExcel = new System.Windows.Forms.LinkLabel();
             this.txtStartCell = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.llinkFetToExcelHelp = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // btnFileFet
@@ -100,12 +101,12 @@
             // llinkFetToExcel
             // 
             this.llinkFetToExcel.AutoSize = true;
-            this.llinkFetToExcel.Location = new System.Drawing.Point(405, 128);
+            this.llinkFetToExcel.Location = new System.Drawing.Point(434, 98);
             this.llinkFetToExcel.Name = "llinkFetToExcel";
-            this.llinkFetToExcel.Size = new System.Drawing.Size(63, 13);
+            this.llinkFetToExcel.Size = new System.Drawing.Size(60, 13);
             this.llinkFetToExcel.TabIndex = 5;
             this.llinkFetToExcel.TabStop = true;
-            this.llinkFetToExcel.Text = "Fet to Excel";
+            this.llinkFetToExcel.Text = "Downloads";
             this.llinkFetToExcel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LlinkFetToExcel_LinkClicked);
             // 
             // txtStartCell
@@ -124,11 +125,23 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Cella di partenza:";
             // 
+            // llinkFetToExcelHelp
+            // 
+            this.llinkFetToExcelHelp.AutoSize = true;
+            this.llinkFetToExcelHelp.Location = new System.Drawing.Point(434, 123);
+            this.llinkFetToExcelHelp.Name = "llinkFetToExcelHelp";
+            this.llinkFetToExcelHelp.Size = new System.Drawing.Size(29, 13);
+            this.llinkFetToExcelHelp.TabIndex = 8;
+            this.llinkFetToExcelHelp.TabStop = true;
+            this.llinkFetToExcelHelp.Text = "Help";
+            this.llinkFetToExcelHelp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llinkFetToExcelHelp_LinkClicked);
+            // 
             // FetToExcel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(506, 153);
+            this.Controls.Add(this.llinkFetToExcelHelp);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtStartCell);
             this.Controls.Add(this.llinkFetToExcel);
@@ -160,6 +173,7 @@
         private System.Windows.Forms.LinkLabel llinkFetToExcel;
         private System.Windows.Forms.TextBox txtStartCell;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.LinkLabel llinkFetToExcelHelp;
     }
 }
 

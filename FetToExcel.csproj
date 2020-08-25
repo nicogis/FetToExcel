@@ -94,7 +94,6 @@
     </Compile>
     <None Include=".gitattributes" />
     <None Include=".gitignore" />
-    <None Include="appveyor.yml" />
     <None Include="config.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
