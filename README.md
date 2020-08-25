@@ -1,4 +1,4 @@
-﻿# FET to Excel [![Build status](https://ci.appveyor.com/api/projects/status/github/nicogis/fettoexcel?branch=master&svg=true)](https://ci.appveyor.com/api/projects/status/github/nicogis/fettoexcel?branch=master)
+﻿# FET to Excel
 
 
 ### Descrizione
