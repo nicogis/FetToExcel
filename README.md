@@ -38,7 +38,7 @@ File di configurazione (config.json)
 
 ### Requisiti
 
-Windows con installato il NET Framework 4.6.1 o superiore
+Windows con installato il NET Framework 4.8 o superiore
 
 ### Limitazioni
 

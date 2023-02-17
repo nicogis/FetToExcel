@@ -29,6 +29,8 @@ namespace FetToExcel
         public FetToExcel()
         {
             InitializeComponent();
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             FileVersionInfo fileVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location);
             this.Text = $"{fileVersion.ProductName} - Versione {fileVersion.ProductVersion}";
 
@@ -279,7 +281,7 @@ namespace FetToExcel
                 using (var excelPackage = new ExcelPackage(fileInfo, fileInfoTemplate))
                 {
 
-                    ExcelWorksheet excelWorksheet = excelPackage.Workbook.Worksheets[1]; // 1° foglio
+                    ExcelWorksheet excelWorksheet = excelPackage.Workbook.Worksheets[0]; // 1° foglio
 
                     string startCell = cellStartTeachers;
                     if (!string.IsNullOrWhiteSpace(txtStartCell.Text))
