@@ -161,7 +161,7 @@ namespace FetToExcel
                 }
                 
 
-                XmlNodeList teachers = teachersTimeTable[0].ChildNodes;
+                var teachers = document.SelectNodes("Teachers_Timetable")[0].Cast<XmlNode>();
 
                 
                 
@@ -234,6 +234,13 @@ namespace FetToExcel
                 int? idxOra = null;
                 int? idxGiorno = null;
                 int? numeroColonna = null;
+
+
+                if (this.chkOrderByName.Checked)
+                {
+                    teachers = teachers.OrderBy(r => r.Attributes["name"].Value);
+                }
+
 
                 foreach (XmlNode teacher in teachers)
                 {

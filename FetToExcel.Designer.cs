@@ -39,6 +39,7 @@
             this.txtStartCell = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.llinkFetToExcelHelp = new System.Windows.Forms.LinkLabel();
+            this.chkOrderByName = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnFileFet
@@ -136,11 +137,22 @@
             this.llinkFetToExcelHelp.Text = "Help";
             this.llinkFetToExcelHelp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llinkFetToExcelHelp_LinkClicked);
             // 
+            // chkOrderByName
+            // 
+            this.chkOrderByName.AutoSize = true;
+            this.chkOrderByName.Location = new System.Drawing.Point(179, 93);
+            this.chkOrderByName.Name = "chkOrderByName";
+            this.chkOrderByName.Size = new System.Drawing.Size(104, 17);
+            this.chkOrderByName.TabIndex = 9;
+            this.chkOrderByName.Text = "Ordina per nome";
+            this.chkOrderByName.UseVisualStyleBackColor = true;
+            // 
             // FetToExcel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(506, 153);
+            this.Controls.Add(this.chkOrderByName);
             this.Controls.Add(this.llinkFetToExcelHelp);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtStartCell);
@@ -174,6 +186,7 @@
         private System.Windows.Forms.TextBox txtStartCell;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel llinkFetToExcelHelp;
+        private System.Windows.Forms.CheckBox chkOrderByName;
     }
 }
 
